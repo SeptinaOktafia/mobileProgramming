@@ -1,8 +1,4 @@
 <resources>
     <string name="app_name">mobilePrograming</string>
-    <string name="panjang">panjang</string>
-    <string name="lebar">Lebar</string>
-    <string name="tinggi">Tinggi</string>
-    <string name="hitung">Hitung</string>
-    <string name="result">result</string>
+    <string name="pindahactivity">pindahActivity</string>
 </resources>

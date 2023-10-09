@@ -1,5 +1,6 @@
 package id.rhptl.mobileprograming
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,55 +9,37 @@ import android.widget.EditText
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var btn_switch: Button
+    private lateinit var btn_switchdata: Button
 
-    // deklarasi variabel
-    private lateinit var inputpanjang: EditText
-    private lateinit var inputLebar: EditText
-    private lateinit var inputtinggi: EditText
-    private lateinit var btn: Button
-    private lateinit var result: TextView
 
-    companion object{
-        private const val STATE_RESULT ="state_result"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        btn_switch = findViewById(R.id.btn_switch)
+        btn_switch.setOnClickListener(this)
 
-        // inisialisasi variabel
-        inputpanjang = findViewById(R.id.edt_length)
-        inputLebar = findViewById(R.id.edt_height)
-        inputtinggi = findViewById(R.id.edt_width)
-        btn = findViewById(R.id.btn_result)
-        result = findViewById(R.id.result)
-
-        btn.setOnClickListener(this)
-
-        //menampilkan value yang ada di budle
-        if (savedInstanceState !=null) {
-            result.text=savedInstanceState.getString(STATE_RESULT)
-        }
-
-
+        btn_switchdata = findViewById(R.id.btn_switchdata)
+        btn_switchdata.setOnClickListener(this)
     }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(STATE_RESULT,result.text.toString());
-    }
-
-
 
     override fun onClick(v: View?) {
-        if (v?.id==R.id.btn_result){
-            var panjang = inputpanjang.text.toString().trim()
-            var lebar = inputLebar.text.toString().trim()
-            var tinggi = inputtinggi.text.toString().trim()
-            var volume = panjang.toDouble() * lebar.toDouble() * tinggi.toDouble()
-            result.text = volume.toString()
-        }
+        when(v?.id){
+            R.id.btn_switch ->{
+                val intent = Intent( this@MainActivity, Activity2::class.java)
+                startActivity(intent)
 
+            }
+            R.id.btn_switchdata ->{
+                val moveWithDataIntent = Intent(this@MainActivity, MainActivity3::class.java)
+                moveWithDataIntent.putExtra(MainActivity3.EXTRA_NAME, "SEPTINA OKTAFIA")
+                moveWithDataIntent.putExtra(MainActivity3.EXTRA_AGE, 22)
+                moveWithDataIntent.putExtra(MainActivity3.EXTRA_JUR, "TEKNIK ELEKTORNIKA")
+                startActivity(moveWithDataIntent)
+            }
+
+        }
     }
 
 
